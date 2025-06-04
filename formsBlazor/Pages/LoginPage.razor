@@ -1,36 +1,53 @@
 @page "/login"
 
+@inject HttpClient Http
+
 <h3>Login Form</h3>
 
 <div>
     <label>Login:</label>
-    <input @bind="login" placeholder="login" />
+    <input @bind="login" placeholder="login"/>
 </div>
 
 <div>
     <label>Password:</label>
-    <input @bind="password" placeholder="password" type="password" />
+    <input @bind="password" placeholder="password" type="password"/>
 </div>
 
 <button @onclick="HandleLogin">Login</button>
 
 <p>@message</p>
 
-@code { 
+@code {
     private string login = string.Empty;
     private string password = string.Empty;
     private string message = string.Empty;
 
-    private void HandleLogin()
+    private async Task HandleLogin()
     {
-        // Простий "логін": login = "admin", password = "1234"
-        if (login == "admin" && password == "1234")
+        var requestData = new
         {
-            message = "Login successful!";
+            login = this.login,
+            password = this.password
+        };
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync("https/api/test", requestData);
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+                message = $"Login successful! Server says: {result}";
+            }
+            else
+            {
+                message = $"Login failed. Status code: {response.StatusCode}";
+            }
         }
-        else
+        catch (Exception ex)
         {
-            message = "Invalid login or password.";
+            message = $"Error: {ex.Message}";
         }
     }
+
 }
