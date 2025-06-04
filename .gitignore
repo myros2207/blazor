@@ -1,0 +1,44 @@
+# Build
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider IDE
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# .NET Core / Blazor
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Node modules
+node_modules/
+
+# Mac
+.DS_Store
+
+# Logs
+*.log
+
+# Local History for Rider / VSCode
+.history/
+
+# npm debug log
+npm-debug.log*
+
+# Blazor WebAssembly
+wwwroot/dist/
+wwwroot/css/bootstrap/
+
